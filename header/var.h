@@ -9,7 +9,7 @@ enum phone_type
     Office,
     Work,
     Home,
-    Main
+    Main,
 };
 struct number
 {
