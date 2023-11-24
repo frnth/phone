@@ -73,7 +73,7 @@ void Add()
 void Search()
 {
     remove_index.clear();
-    //vector<int> remove_index;
+    // vector<int> remove_index;
     cout << "enter : ";
     string search_word;
     cin >> search_word;
@@ -119,7 +119,6 @@ void Search()
     {
         cout << "isgamono gerefti ?!!\n";
     }
-    
 }
 
 void Delete()
@@ -133,25 +132,33 @@ void Delete()
 
 void Delete_all()
 {
-    phone_book.clear();
+    cout << "are you sure?";
+    string s;
+    cin >> s;
+    if (s == "yes")
+    {
+        phone_book.clear();
+    }
 }
 
 void Show()
 {
     cout << "PHONE BOOK :\n";
-    for(int i = 0; i < phone_book.size(); i++) {
+    for (int i = 0; i < phone_book.size(); i++)
+    {
         cout << phone_book[i].name;
         cout << phone_book[i].family;
         for (const auto &j : phone_book[i].numbers)
         {
             cout << "type : " << phone_type(j.type) << " , "
-                << "number : " << j.num << endl;
+                 << "number : " << j.num << endl;
         }
     }
 }
 
 void Sort()
 {
+    
 }
 
 void Save()
