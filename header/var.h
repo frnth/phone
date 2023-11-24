@@ -1,5 +1,8 @@
+#ifndef VAR_H
+#define VAR_H
 
 
+#include <vector>
 #include <string>
 
 using namespace std;
@@ -27,3 +30,5 @@ struct user
 
 vector<user> phone_book;
 vector<int> remove_index;
+
+#endif

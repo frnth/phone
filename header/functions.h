@@ -1,3 +1,6 @@
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
 
 #include <iostream>
 #include "var.h"
@@ -26,6 +29,7 @@ string Cast_Int_TO_PhoneType(int n)
         break;
     }
 }
+
 void Add()
 {
     user user;
@@ -127,7 +131,7 @@ void Delete()
     cout << "which one ? :";
     int x;
     cin >> x;
-    phone_book[remove_index[x]].erase();
+    phone_book.erase(phone_book.begin() + remove_index[x]);
 }
 
 void Delete_all()
@@ -158,7 +162,6 @@ void Show()
 
 void Sort()
 {
-    
 }
 
 void Save()
@@ -168,3 +171,6 @@ void Save()
 void Import()
 {
 }
+
+
+#endif // FUNCTIONS_H

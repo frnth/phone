@@ -29,13 +29,13 @@ int main()
             Search();
             break;
         case 3:
-            // Delete();
+            Delete();
             break;
         case 4:
-            // Delete_all();
+            Delete_all();
             break;
         case 5:
-            // Show();
+            Show();
             break;
         case 6:
             // Sort();
@@ -53,4 +53,6 @@ int main()
         }
 
     } while (flag);
+
+    return 0;
 }
