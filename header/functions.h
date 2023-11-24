@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string phone_type(int n)
+string Cast_Int_TO_PhoneType(int n)
 {
     switch (n)
     {
@@ -49,7 +49,7 @@ void Add()
         cout << "5)Main\n";
         int n;
         cin >> n;
-        h_user.type = phone_type(n);
+        h_user.type = Cast_Int_TO_PhoneType(n);
 
         cout << "enter number : ";
         cin >> h_user.num;
