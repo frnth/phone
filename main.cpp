@@ -1,6 +1,6 @@
 #include <iostream>
 #include "./header/var.h"
-
+#include "./header/functions.h"
 using namespace std;
 
 int main()
@@ -23,10 +23,10 @@ int main()
         switch (n)
         {
         case 1:
-            // Add();
+            Add();
             break;
         case 2:
-            // Search();
+            Search();
             break;
         case 3:
             // Delete();
