@@ -19,6 +19,7 @@ int main()
         cout << "7)Import\n";
         cout << "8)Save\n";
         cout << "9)Exit\n";
+        cout << "bogoo : ";
         cin >> n;
         switch (n)
         {
@@ -38,16 +39,15 @@ int main()
             Show();
             break;
         case 6:
-            // Sort();
+            Sort();
             break;
         case 7:
-            // Import();
+            Import();
             break;
         case 8:
-            // Save();
+            Save();
             break;
         case 9:
-            // Exit();
             flag = false;
             break;
         }

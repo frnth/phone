@@ -1,7 +1,6 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-
 #include <iostream>
 #include "var.h"
 #include <vector>
@@ -150,27 +149,38 @@ void Show()
     cout << "PHONE BOOK :\n";
     for (int i = 0; i < phone_book.size(); i++)
     {
-        cout << phone_book[i].name;
-        cout << phone_book[i].family;
+        cout << "name : " << phone_book[i].name << "  ";
+        cout << "family :" << phone_book[i].family << endl;
+        cout << "email : " << phone_book[i].email << endl;
         for (const auto &j : phone_book[i].numbers)
         {
-            cout << "type : " << phone_type(j.type) << " , "
-                 << "number : " << j.num << endl;
+            cout << "number : " << j.num << "   (type : " << Cast_Int_TO_PhoneType(int(j.type)) << ")\n";
         }
+        cout << "......................\n";
     }
 }
 
 void Sort()
 {
+    for (int i = 0; i < phone_book.size(); i++)
+    {
+        for (int j = 0; j < phone_book.size() - i - 1; j++)
+        {
+            if (phone_book[j].name +  phone_book[j].family > phone_book[j + 1].name + phone_book[j + 1].family)
+            {
+                swap(phone_book[j], phone_book[j + 1]);
+            }
+        }
+    }
 }
 
 void Save()
 {
+    
 }
 
 void Import()
 {
 }
-
 
 #endif // FUNCTIONS_H
