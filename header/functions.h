@@ -4,6 +4,9 @@
 #include <iostream>
 #include "var.h"
 #include <vector>
+#include "./json.hpp"
+#include <fstream>
+
 
 using namespace std;
 
@@ -13,21 +16,19 @@ string Cast_Int_TO_PhoneType(int n)
     {
     case 0:
         return "Fax";
-        break;
     case 1:
         return "Office";
-        break;
     case 2:
         return "Work";
-        break;
     case 3:
         return "Home";
-        break;
     case 4:
         return "Main";
-        break;
+    default:
+        return "Unknown";
     }
 }
+
 
 void Add()
 {
@@ -176,11 +177,74 @@ void Sort()
 
 void Save()
 {
-    
+    nlohmann::json jsonPhoneBook;
+
+    for (const auto &contact : phone_book)
+    {
+        nlohmann::json jsonContact;
+        jsonContact["name"] = contact.name;
+        jsonContact["family"] = contact.family;
+        jsonContact["email"] = contact.email;
+
+        nlohmann::json jsonNumbers;
+        for (const auto &number : contact.numbers)
+        {
+            nlohmann::json jsonNumber;
+            jsonNumber["num"] = number.num;
+            jsonNumber["type"] = static_cast<int>(number.type);
+            jsonNumbers.push_back(jsonNumber);
+        }
+
+        jsonContact["numbers"] = jsonNumbers;
+        jsonPhoneBook.push_back(jsonContact);
+    }
+
+    std::ofstream outputFile("./database/phone_book.json");
+
+    if (!outputFile.is_open())
+    {
+        cout << "Error creating or opening file for save.\n";
+        return;
+    }
+
+    outputFile << jsonPhoneBook.dump(4); 
+    outputFile.close(); 
+    cout << "Save successful.\n";
 }
 
 void Import()
 {
-}
+    std::ifstream inputFile("./database/phone_book.json");
 
+    if (!inputFile.is_open())
+    {
+        cout << "Error opening file for import.\n";
+        return;
+    }
+
+    nlohmann::json jsonPhoneBook;
+    inputFile >> jsonPhoneBook;
+
+    phone_book.clear();
+
+    for (const auto &jsonContact : jsonPhoneBook)
+    {
+        user contact;
+        contact.name = jsonContact["name"];
+        contact.family = jsonContact["family"];
+        contact.email = jsonContact["email"];
+
+        for (const auto &jsonNumber : jsonContact["numbers"])
+        {
+            number num;
+            num.num = jsonNumber["num"];
+            num.type = static_cast<phone_type>(jsonNumber["type"]);
+            contact.numbers.push_back(num);
+        }
+
+        phone_book.push_back(contact);
+    }
+
+    cout << "Import successful.\n";
+}
 #endif // FUNCTIONS_H

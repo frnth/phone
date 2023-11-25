@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+    Import();
     int n;
     bool flag = true;
     do
@@ -48,6 +49,7 @@ int main()
             Save();
             break;
         case 9:
+            Save();
             flag = false;
             break;
         }
