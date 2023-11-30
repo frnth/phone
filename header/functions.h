@@ -194,9 +194,10 @@ void Save()
             int phonesize = phone_book.at(i).numbers.size();
             telephone.write((char*) &phonesize, sizeof(int));
             for(int j = 0; j < phonesize; j++) {
-                int phonelength1 = phone_book.at(i).numbers.at(j).type.length();
+                string ss = Cast_Int_TO_PhoneType(phone_book.at(i).numbers.at(j).type);
+                int phonelength1 = ss.length();
                 telephone.write((char*) &phonelength1, sizeof(int));
-                telephone.write(phone_book.at(i).numbers.at(j)type.c_str(), phonelength1);
+                telephone.write(ss.c_str(), phonelength1);
 
                 int phonelength2 = phone_book.at(i).numbers.at(j).num.length();
                 telephone.write((char*) &phonelength2, sizeof(int));
@@ -212,7 +213,85 @@ void Save()
 
 void Import()
 {
-    
+    ifstream add_file = ("phonefile.bin", ios::binary);
+    int i = 0;
+    if(add_file) {
+        while(add_file) {
+            add_file.resize(i + 1);
+            int nameLength;
+            add_file.read((char*)&nameLength, sizeof(int)); 
+            phone_book.at(i).name.resize(nameLength); 
+            add_file.read(&phone_book.at(i).name[0], nameLength);
+            
+            int familyLength;
+            add_file.read((char*)&familyLength, sizeof(int)); // خواندن طول فامیل از فایل
+            phone_book.at(i).family.resize(familyLength); // تغییر اندازه فامیل برابر با طول فامیل
+            add_file.read(&phone_book.at(i).family[0], familyLength); // خواندن فامیل از فایل
+
+
+            int emailLength;
+            fin.read((char*)&emailLength, sizeof(int)); // خواندن طول ایمیل از فایل
+            saveContact.at(i).email.resize(emailLength); // تغییر اندازه ایمیل برابر با طول ایمیل
+            fin.read(&saveContact.at(i).email[0], emailLength); // خواندن ایمیل از فا
+
+            int phoneSize;
+            fin.read((char*)&phoneSize, sizeof(int)); // خواندن تعداد شماره های تلفن از فایل
+            saveContact.at(i).phoneNumber.resize(phoneSize); // تغییر اندازه بردار شماره های تلفن برابر با تعداد شماره های تلفن
+            for (int j = 0; j < phoneSize; j++)
+            {
+                int phoneLength;
+                fin.read((char*)&phoneLength, sizeof(int)); // خواندن طول هر شماره تلفن از فایل
+                saveContact.at(i).phoneNumber.at(j).resize(phoneLength); // تغییر اندازه هر شماره تلفن برابر با طول شماره تلفن
+                fin.read(&saveContact.at(i).phoneNumber.at(j)[0], phoneLength); // خواندن هر شماره تلفن از فایل
+
+                ++;
+            }
+saveContact.pop_back(); // حذف آخرین عنصر بردار که خالی است
+fin.close(); // بستن فای
+        }
+    }
+
     
 }
 #endif // FUNCTIONS_H
+
+
+
+
+
+
+
+saveContact.resize(i + 1);
+            // خواندن نام از فایل
+            int nameLength;
+            fin.read((char*)&nameLength, sizeof(int)); // خواندن طول نام از فایل
+            saveContact.at(i).name.resize(nameLength); // تغییر اندازه نام برابر با طول نام
+            fin.read(&saveContact.at(i).name[0], nameLength); // خواندن نام از فایل
+
+            // خواندن فا int familyLength;
+fin.read((char*)&familyLength, sizeof(int)); // خواندن طول فامیل از فایل
+saveContact.at(i).family.resize(familyLength); // تغییر اندازه فامیل برابر با طول فامیل
+fin.read(&saveContact.at(i).family[0], familyLength); // خواندن فامیل از فایل
+
+int emailLength;
+fin.read((char*)&emailLength, sizeof(int)); // خواندن طول ایمیل از فایل
+saveContact.at(i).email.resize(emailLength); // تغییر اندازه ایمیل برابر با طول ایمیل
+fin.read(&saveContact.at(i).email[0], emailLength); // خواندن ایمیل از فایل
+
+            // خواندن شماره های تلفن از فایل
+int phoneSize;
+fin.read((char*)&phoneSize, sizeof(int)); // خواندن تعداد شماره های تلفن از فایل
+saveContact.at(i).phoneNumber.resize(phoneSize); // تغییر اندازه بردار شماره های تلفن برابر با تعداد شماره های تلفن
+for (int j = 0; j < phoneSize; j++)
+{
+     int phoneLength;
+ fin.read((char*)&phoneLength, sizeof(int)); // خواندن طول هر شماره تلفن از فایل
+ saveContact.at(i).phoneNumber.at(j).resize(phoneLength); // تغییر اندازه هر شماره تلفن برابر با طول شماره تلفن
+ fin.read(&saveContact.at(i).phoneNumber.at(j)[0], phoneLength); // خواندن هر شماره تلفن از فایل
+
+i++;
+}
+saveContact.pop_back(); // حذف آخرین عنصر بردار که خالی است
+fin.close(); // بستن فایل
+    }
+    return sa
