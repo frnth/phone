@@ -4,7 +4,6 @@
 #include <iostream>
 #include "var.h"
 #include <vector>
-#include "./json.hpp"
 #include <fstream>
 
 
@@ -177,74 +176,43 @@ void Sort()
 
 void Save()
 {
-    nlohmann::json jsonPhoneBook;
+    ofstream telephone("telephone.bin", ios::binary | ios::trunc);
+    if(telephone) {
+        for(int i = 0; i < phone_book.size(); i++) {
+            int namelength = phone_book.at(i).name.length();
+            telephone.write((char*) &namelength, sizeof(int));
+            telephone.write(phone_book.at(i).name.c_str(), namelength);
 
-    for (const auto &contact : phone_book)
-    {
-        nlohmann::json jsonContact;
-        jsonContact["name"] = contact.name;
-        jsonContact["family"] = contact.family;
-        jsonContact["email"] = contact.email;
+            int familylength = phone_book.at(i).family.length();
+            telephone.write((char*) &familylength, sizeof(int));
+            telephone.write(phone_book.at(i).family.c_str(), familylength);
 
-        nlohmann::json jsonNumbers;
-        for (const auto &number : contact.numbers)
-        {
-            nlohmann::json jsonNumber;
-            jsonNumber["num"] = number.num;
-            jsonNumber["type"] = static_cast<int>(number.type);
-            jsonNumbers.push_back(jsonNumber);
+            int emaillength = phone_book.at(i).email.length();
+            telephone.write((char*) &emaillength, sizeof(int));
+            telephone.write(phone_book.at(i).email.c_str(), emaillength);
+
+            int phonesize = phone_book.at(i).numbers.size();
+            telephone.write((char*) &phonesize, sizeof(int));
+            for(int j = 0; j < phonesize; j++) {
+                int phonelength1 = phone_book.at(i).numbers.at(j).type.length();
+                telephone.write((char*) &phonelength1, sizeof(int));
+                telephone.write(phone_book.at(i).numbers.at(j)type.c_str(), phonelength1);
+
+                int phonelength2 = phone_book.at(i).numbers.at(j).num.length();
+                telephone.write((char*) &phonelength2, sizeof(int));
+                telephone.write(phone_book.at(i).numbers.at(j).num.c_str(), phonelength2);
+            }
+            
+
         }
-
-        jsonContact["numbers"] = jsonNumbers;
-        jsonPhoneBook.push_back(jsonContact);
+        telephone.close();
     }
-
-    std::ofstream outputFile("./database/phone_book.json");
-
-    if (!outputFile.is_open())
-    {
-        cout << "Error creating or opening file for save.\n";
-        return;
-    }
-
-    outputFile << jsonPhoneBook.dump(4); 
-    outputFile.close(); 
-    cout << "Save successful.\n";
+   
 }
 
 void Import()
 {
-    std::ifstream inputFile("./database/phone_book.json");
-
-    if (!inputFile.is_open())
-    {
-        cout << "Error opening file for import.\n";
-        return;
-    }
-
-    nlohmann::json jsonPhoneBook;
-    inputFile >> jsonPhoneBook;
-
-    phone_book.clear();
-
-    for (const auto &jsonContact : jsonPhoneBook)
-    {
-        user contact;
-        contact.name = jsonContact["name"];
-        contact.family = jsonContact["family"];
-        contact.email = jsonContact["email"];
-
-        for (const auto &jsonNumber : jsonContact["numbers"])
-        {
-            number num;
-            num.num = jsonNumber["num"];
-            num.type = static_cast<phone_type>(jsonNumber["type"]);
-            contact.numbers.push_back(num);
-        }
-
-        phone_book.push_back(contact);
-    }
-
-    cout << "Import successful.\n";
+    
+    
 }
 #endif // FUNCTIONS_H
