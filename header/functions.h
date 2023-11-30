@@ -6,7 +6,6 @@
 #include <vector>
 #include <fstream>
 
-
 using namespace std;
 
 string Cast_Int_TO_PhoneType(int n)
@@ -27,7 +26,6 @@ string Cast_Int_TO_PhoneType(int n)
         return "Unknown";
     }
 }
-
 
 void Add()
 {
@@ -166,7 +164,7 @@ void Sort()
     {
         for (int j = 0; j < phone_book.size() - i - 1; j++)
         {
-            if (phone_book[j].name +  phone_book[j].family > phone_book[j + 1].name + phone_book[j + 1].family)
+            if (phone_book[j].name + phone_book[j].family > phone_book[j + 1].name + phone_book[j + 1].family)
             {
                 swap(phone_book[j], phone_book[j + 1]);
             }
@@ -177,40 +175,40 @@ void Sort()
 void Save()
 {
     ofstream telephone("telephone.bin", ios::binary | ios::trunc);
-    if(telephone) {
-        for(int i = 0; i < phone_book.size(); i++) {
+    if (telephone)
+    {
+        for (int i = 0; i < phone_book.size(); i++)
+        {
             int namelength = phone_book.at(i).name.length();
-            telephone.write((char*) &namelength, sizeof(int));
+            telephone.write((char *)&namelength, sizeof(int));
             telephone.write(phone_book.at(i).name.c_str(), namelength);
 
             int familylength = phone_book.at(i).family.length();
-            telephone.write((char*) &familylength, sizeof(int));
+            telephone.write((char *)&familylength, sizeof(int));
             telephone.write(phone_book.at(i).family.c_str(), familylength);
 
             int emaillength = phone_book.at(i).email.length();
-            telephone.write((char*) &emaillength, sizeof(int));
+            telephone.write((char *)&emaillength, sizeof(int));
             telephone.write(phone_book.at(i).email.c_str(), emaillength);
 
             int phonesize = phone_book.at(i).numbers.size();
-            telephone.write((char*) &phonesize, sizeof(int));
-            for(int j = 0; j < phonesize; j++) {
+            telephone.write((char *)&phonesize, sizeof(int));
+            for (int j = 0; j < phonesize; j++)
+            {
                 string ss = Cast_Int_TO_PhoneType(phone_book.at(i).numbers.at(j).type);
                 int phonelength1 = ss.length();
-                telephone.write((char*) &phonelength1, sizeof(int));
+                telephone.write((char *)&phonelength1, sizeof(int));
                 telephone.write(ss.c_str(), phonelength1);
 
                 int phonelength2 = phone_book.at(i).numbers.at(j).num.length();
-                telephone.write((char*) &phonelength2, sizeof(int));
+                telephone.write((char *)&phonelength2, sizeof(int));
                 telephone.write(phone_book.at(i).numbers.at(j).num.c_str(), phonelength2);
             }
-            
-
         }
         telephone.close();
     }
-   
 }
-/*
+
 void Import()
 {
     ifstream add_file = ("phonefile.bin", ios::binary);
@@ -219,42 +217,41 @@ void Import()
         while(add_file) {
             add_file.resize(i + 1);
             int nameLength;
-            add_file.read((char*)&nameLength, sizeof(int)); 
-            phone_book.at(i).name.resize(nameLength); 
+            add_file.read((char*)&nameLength, sizeof(int));
+            phone_book.at(i).name.resize(nameLength);
             add_file.read(&phone_book.at(i).name[0], nameLength);
-            
+
             int familyLength;
-            add_file.read((char*)&familyLength, sizeof(int));  
-            phone_book.at(i).family.resize(familyLength); 
-            add_file.read(&phone_book.at(i).family[0], familyLength); 
+            add_file.read((char*)&familyLength, sizeof(int));
+            phone_book.at(i).family.resize(familyLength);
+            add_file.read(&phone_book.at(i).family[0], familyLength);
 
 
             int emailLength;
             add_file.read((char*)&emailLength, sizeof(int));
-            phone_book.at(i).email.resize(emailLength); 
+            phone_book.at(i).email.resize(emailLength);
             add_file.read(&phone_book.at(i).email[0], emailLength);
             int phoneSize;
-            add_file.read((char*)&phoneSize, sizeof(int)); 
-            phone_book.at(i).numbers.resize(phoneSize); 
+            add_file.read((char*)&phoneSize, sizeof(int));
+            phone_book.at(i).numbers.resize(phoneSize);
             for (int j = 0; j < phoneSize; j++)
             {
                 int phoneLength;
                 add_file.read((char*)&phoneLength, sizeof(int));
-                phone_book.at(i).numbers.at(j).resize(phoneLength); 
-                add_file.read(&phone_book.at(i).numbers.at(j)[0], phoneLength); 
+                phone_book.at(i).numbers.at(j).resize(phoneLength);
+                add_file.read(&phone_book.at(i).numbers.at(j), phoneLength);
 
                 i++;
             }
-phone_book.pop_back();  
-add_file.close(); 
+phone_book.pop_back();
+add_file.close();
         }
     }
 
-    
+
 }
+
+
+
 #endif // FUNCTIONS_H
-*/
-
-
-
 

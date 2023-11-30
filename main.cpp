@@ -43,7 +43,7 @@ int main()
             Sort();
             break;
         case 7:
-            //Import();
+            Import();
             break;
         case 8:
             Save();
