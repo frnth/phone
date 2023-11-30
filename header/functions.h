@@ -77,7 +77,6 @@ void Add()
 void Search()
 {
     remove_index.clear();
-    // vector<int> remove_index;
     cout << "enter : ";
     string search_word;
     cin >> search_word;
@@ -87,8 +86,8 @@ void Search()
         if (phone_book[i].name == search_word || phone_book[i].family == search_word)
         {
             cout << c << ") ";
-            cout << phone_book[i].name;
-            cout << phone_book[i].family;
+            cout << phone_book[i].name<<"  ";
+            cout << phone_book[i].family<<"  ";
             for (const auto &j : phone_book[i].numbers)
             {
                 cout << "type : " << Cast_Int_TO_PhoneType(j.type) << " , "
@@ -199,7 +198,7 @@ void Save()
         jsonPhoneBook.push_back(jsonContact);
     }
 
-    std::ofstream outputFile("./database/phone_book.json");
+    ofstream outputFile("./database/phone_book.json");
 
     if (!outputFile.is_open())
     {
@@ -214,7 +213,7 @@ void Save()
 
 void Import()
 {
-    std::ifstream inputFile("./database/phone_book.json");
+    ifstream inputFile("./database/phone_book.json");
 
     if (!inputFile.is_open())
     {
