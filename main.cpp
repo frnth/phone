@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    Import();
+    //Import();
     int n;
     bool flag = true;
     do
@@ -43,7 +43,7 @@ int main()
             Sort();
             break;
         case 7:
-            Import();
+            //Import();
             break;
         case 8:
             Save();

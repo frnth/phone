@@ -210,7 +210,7 @@ void Save()
     }
    
 }
-
+/*
 void Import()
 {
     ifstream add_file = ("phonefile.bin", ios::binary);
@@ -224,74 +224,37 @@ void Import()
             add_file.read(&phone_book.at(i).name[0], nameLength);
             
             int familyLength;
-            add_file.read((char*)&familyLength, sizeof(int)); // خواندن طول فامیل از فایل
-            phone_book.at(i).family.resize(familyLength); // تغییر اندازه فامیل برابر با طول فامیل
-            add_file.read(&phone_book.at(i).family[0], familyLength); // خواندن فامیل از فایل
+            add_file.read((char*)&familyLength, sizeof(int));  
+            phone_book.at(i).family.resize(familyLength); 
+            add_file.read(&phone_book.at(i).family[0], familyLength); 
 
 
             int emailLength;
-            fin.read((char*)&emailLength, sizeof(int)); // خواندن طول ایمیل از فایل
-            saveContact.at(i).email.resize(emailLength); // تغییر اندازه ایمیل برابر با طول ایمیل
-            fin.read(&saveContact.at(i).email[0], emailLength); // خواندن ایمیل از فا
-
+            add_file.read((char*)&emailLength, sizeof(int));
+            phone_book.at(i).email.resize(emailLength); 
+            add_file.read(&phone_book.at(i).email[0], emailLength);
             int phoneSize;
-            fin.read((char*)&phoneSize, sizeof(int)); // خواندن تعداد شماره های تلفن از فایل
-            saveContact.at(i).phoneNumber.resize(phoneSize); // تغییر اندازه بردار شماره های تلفن برابر با تعداد شماره های تلفن
+            add_file.read((char*)&phoneSize, sizeof(int)); 
+            phone_book.at(i).numbers.resize(phoneSize); 
             for (int j = 0; j < phoneSize; j++)
             {
                 int phoneLength;
-                fin.read((char*)&phoneLength, sizeof(int)); // خواندن طول هر شماره تلفن از فایل
-                saveContact.at(i).phoneNumber.at(j).resize(phoneLength); // تغییر اندازه هر شماره تلفن برابر با طول شماره تلفن
-                fin.read(&saveContact.at(i).phoneNumber.at(j)[0], phoneLength); // خواندن هر شماره تلفن از فایل
+                add_file.read((char*)&phoneLength, sizeof(int));
+                phone_book.at(i).numbers.at(j).resize(phoneLength); 
+                add_file.read(&phone_book.at(i).numbers.at(j)[0], phoneLength); 
 
-                ++;
+                i++;
             }
-saveContact.pop_back(); // حذف آخرین عنصر بردار که خالی است
-fin.close(); // بستن فای
+phone_book.pop_back();  
+add_file.close(); 
         }
     }
 
     
 }
 #endif // FUNCTIONS_H
+*/
 
 
 
 
-
-
-
-saveContact.resize(i + 1);
-            // خواندن نام از فایل
-            int nameLength;
-            fin.read((char*)&nameLength, sizeof(int)); // خواندن طول نام از فایل
-            saveContact.at(i).name.resize(nameLength); // تغییر اندازه نام برابر با طول نام
-            fin.read(&saveContact.at(i).name[0], nameLength); // خواندن نام از فایل
-
-            // خواندن فا int familyLength;
-fin.read((char*)&familyLength, sizeof(int)); // خواندن طول فامیل از فایل
-saveContact.at(i).family.resize(familyLength); // تغییر اندازه فامیل برابر با طول فامیل
-fin.read(&saveContact.at(i).family[0], familyLength); // خواندن فامیل از فایل
-
-int emailLength;
-fin.read((char*)&emailLength, sizeof(int)); // خواندن طول ایمیل از فایل
-saveContact.at(i).email.resize(emailLength); // تغییر اندازه ایمیل برابر با طول ایمیل
-fin.read(&saveContact.at(i).email[0], emailLength); // خواندن ایمیل از فایل
-
-            // خواندن شماره های تلفن از فایل
-int phoneSize;
-fin.read((char*)&phoneSize, sizeof(int)); // خواندن تعداد شماره های تلفن از فایل
-saveContact.at(i).phoneNumber.resize(phoneSize); // تغییر اندازه بردار شماره های تلفن برابر با تعداد شماره های تلفن
-for (int j = 0; j < phoneSize; j++)
-{
-     int phoneLength;
- fin.read((char*)&phoneLength, sizeof(int)); // خواندن طول هر شماره تلفن از فایل
- saveContact.at(i).phoneNumber.at(j).resize(phoneLength); // تغییر اندازه هر شماره تلفن برابر با طول شماره تلفن
- fin.read(&saveContact.at(i).phoneNumber.at(j)[0], phoneLength); // خواندن هر شماره تلفن از فایل
-
-i++;
-}
-saveContact.pop_back(); // حذف آخرین عنصر بردار که خالی است
-fin.close(); // بستن فایل
-    }
-    return sa
