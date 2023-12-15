@@ -53,7 +53,7 @@ void Add()
         cout << "5)Main\n";
         int n;
         cin >> n;
-        h_user.type = phone_type(n);
+        h_user.type = phone_type(n - 1);
 
         cout << "enter number : ";
         cin >> h_user.num;
@@ -108,7 +108,7 @@ void Search()
                     cout << "lastname : " << phone_book[i].family << endl;
                     for (const auto &j : phone_book[i].numbers)
                     {
-                        cout << "type : " << phone_type(j.type) << " , "
+                        cout << "type : " << Cast_Int_TO_PhoneType(j.type) << " , "
                              << "number : " << j.num << endl;
                     }
                     remove_index.push_back(i);
