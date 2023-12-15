@@ -120,7 +120,7 @@ void Search()
     }
     if (m == -1)
     {
-        cout << "isgamono gerefti ?!!\n";
+        cout << "peyda nashod (?)!!\n";
     }
 }
 
